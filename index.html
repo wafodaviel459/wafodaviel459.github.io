@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wafo Fonguieng Daviel d'Aquin — Carnet de bord</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1EFE9;
+    --paper-alt:#E8E4DA;
+    --ink:#1B2430;
+    --ink-soft:#4A5568;
+    --spine:#2F6F6B;
+    --spine-soft:#DCE7E4;
+    --gold:#C9A227;
+    --line:#D3CFC2;
+    --tag-award:#C9A227;
+    --tag-lead:#2F6F6B;
+    --tag-project:#8B5E3C;
+    --tag-media:#5B6B8C;
+    --radius:2px;
+    --maxw:880px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--spine); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--spine); outline-offset:3px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(241,239,233,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:14px 28px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .nav-mark{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.04em;
+    color:var(--ink-soft);
+  }
+  .nav-links{display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:13px;}
+  .nav-links a{color:var(--ink); border-bottom:1px solid transparent;}
+  .nav-links a:hover{border-bottom:1px solid var(--spine); text-decoration:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:72px 0 56px; border-bottom:1px solid var(--line);}
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--spine);
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow::before{content:""; width:26px; height:1px; background:var(--spine); display:inline-block;}
+  h1.hero-name{
+    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(2.6rem,6vw,4.2rem);
+    line-height:1.02; margin:0 0 20px; color:var(--ink);
+  }
+  .hero-tagline{
+    max-width:68ch; font-size:1.1rem; color:var(--ink-soft); margin:0 0 32px;
+  }
+  .hero-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    padding:12px 20px; border:1px solid var(--ink); color:var(--ink);
+    border-radius:var(--radius); transition:background .15s ease, color .15s ease;
+  }
+  .hero-cta:hover{background:var(--ink); color:var(--paper); text-decoration:none;}
+  .hero-cta svg{width:14px; height:14px; transition:transform .15s ease;}
+  .hero-cta:hover svg{transform:translateY(3px);}
+
+  /* ---------- SECTION LABELS ---------- */
+  .section{padding:64px 0;}
+  .section + .section{border-top:1px solid var(--line);}
+  .section-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:36px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .section-num{color:var(--spine); font-size:13px;}
+  .section-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.9rem; color:var(--ink); margin:0;
+  }
+  .section-sub{color:var(--ink-soft); max-width:60ch; margin:-24px 0 36px; font-size:.98rem;}
+
+  /* ---------- TIMELINE / LOGBOOK ---------- */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:linear-gradient(to bottom, var(--spine) 0%, var(--line) 100%);
+  }
+  .entry{position:relative; padding-bottom:38px;}
+  .entry:last-child{padding-bottom:0;}
+  .entry::before{
+    content:""; position:absolute; left:-26px; top:6px; width:11px; height:11px;
+    border-radius:50%; background:var(--paper); border:2px solid var(--spine);
+  }
+  .entry-meta{
+    display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-bottom:6px;
+  }
+  .entry-date{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft);
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:.05em; padding:2px 8px; border-radius:20px; color:#fff;
+  }
+  .tag.award{background:var(--tag-award);}
+  .tag.lead{background:var(--tag-lead);}
+  .tag.project{background:var(--tag-project);}
+  .tag.media{background:var(--tag-media);}
+  .entry-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.25rem; margin:4px 0 6px; color:var(--ink);
+  }
+  .entry-title .placeholder-link{color:var(--spine); border-bottom:1px dotted var(--spine);}
+  .entry-desc{color:var(--ink-soft); max-width:64ch; font-size:.98rem; margin:0;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-card{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0;
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .contact-item{
+    padding:24px; border-left:1px solid var(--line); background:var(--paper-alt);
+  }
+  .contact-item:first-child{border-left:none;}
+  .contact-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--spine); margin-bottom:8px;
+  }
+  .contact-value{font-size:1.02rem; word-break:break-word;}
+
+  /* ---------- CV ---------- */
+  .cv-row{display:flex; flex-wrap:wrap; gap:16px;}
+  .cv-stamp{
+    display:flex; align-items:center; gap:12px;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    padding:16px 22px; border:1px dashed var(--ink-soft); border-radius:var(--radius);
+    color:var(--ink); flex:1 1 220px; transition:border-color .15s ease, background .15s ease;
+  }
+  .cv-stamp:hover{border-color:var(--spine); background:var(--spine-soft); text-decoration:none;}
+  .cv-stamp .flag{
+    width:22px; height:14px; border-radius:2px; flex-shrink:0;
+  }
+  .flag.en{background:linear-gradient(180deg,#B22234 0 33%, #fff 33% 66%, #3C3B6E 66% 100%);}
+  .flag.fr{background:linear-gradient(90deg,#0055A4 0 33%, #fff 33% 66%, #EF4135 66% 100%);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:32px 0 48px; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- EDIT HINTS (remove when done) ---------- */
+  .todo{
+    background:#FFF7DA; border:1px dashed var(--gold); color:#6b5306;
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+    padding:2px 6px; border-radius:3px; display:inline-block; margin-top:6px;
+  }
+
+  @media (max-width:600px){
+    .nav-links{gap:14px;}
+    .hero{padding:52px 0 40px;}
+    .section{padding:48px 0;}
+    .contact-item{border-left:none; border-top:1px solid var(--line);}
+    .contact-item:first-child{border-top:none;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-mark">LOG // wafodaviel</span>
+    <nav class="nav-links">
+      <a href="#activities">Parcours</a>
+      <a href="#contact">Contact</a>
+      <a href="#cv">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero-eyebrow">Carnet de bord — mis à jour en juillet 2026</div>
+    <h1 class="hero-name">Wafo Fonguieng Daviel d'Aquin</h1>
+    <p class="hero-tagline">
+      17 ans, étudiant en 2ᵉ année à l'EMINES – School of Industrial Management (UM6P) · futur ingénieur en management industriel.<br>
+      Rigoureux et persévérant, toujours prêt à relever de nouveaux défis. Ma capacité à apprendre rapidement et à m'adapter à des situations variées me permet de m'épanouir dans des environnements dynamiques. Grâce à une solide formation scientifique, je maîtrise les mathématiques, la physique, la chimie et l'informatique, ce qui me permet d'aborder les problèmes avec précision et méthode.
+    </p>
+    <a class="hero-cta" href="#activities">
+      Voir le parcours
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <section class="section wrap" id="activities">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Parcours &amp; distinctions</h2>
+    </div>
+    <p class="section-sub">Chaque entrée est un point du chemin : un projet, un prix, une responsabilité. Garde l'ordre chronologique, du plus récent au plus ancien.</p>
+
+    <div class="timeline">
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="entry-date">2026 · S2</span>
+          <span class="tag project">Projet</span>
+        </div>
+        <div class="entry-title">Machine à dessiner cartésienne (H-bot)</div>
+        <p class="entry-desc">Projet d'enseignement consistant à réaliser un robot déplaçant un effecteur sur trois axes selon une architecture H-bot, dans le but de reproduire un dessin sur papier.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="entry-date">2025 – janv. 2026 · S1</span>
+          <span class="tag project">Projet</span>
+        </div>
+        <div class="entry-title">Plateforme mobile à trois roues</div>
+        <p class="entry-desc">Projet d'enseignement consistant à concevoir une plateforme mobile à trois roues, la roue avant unique étant à la fois motrice et directrice.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="entry-date">2025</span>
+          <span class="tag award">Prix</span>
+        </div>
+        <div class="entry-title">7ᵉ place — Journée de l'Excellence Scolaire (JES 2025)</div>
+        <p class="entry-desc">Organisée par l'ISTIC (Institut Supérieur de Traduction, Interprétation et Communication de Yaoundé), filiale de l'IUA (Institut Universitaire d'Afrique). Attestation disponible en pièce jointe.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="entry-date">2025</span>
+          <span class="tag award">Prix</span>
+        </div>
+        <div class="entry-title">2ᵉ place sur 1920 candidats — 17ᵉ édition des Olympiades Polytechniciennes Nationales Bilingues (OPNB)</div>
+        <p class="entry-desc">Cameroun, option C (mathématiques et sciences physiques). Organisées par l'ENSPY en collaboration avec Intelligentsia Corporation. Classement et attestation disponibles en pièce jointe.</p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-meta">
+          <span class="entry-date">2025</span>
+          <span class="tag award">Participation</span>
+        </div>
+        <div class="entry-title">Olympiades scientifiques — Collège François-Xavier Vogt</div>
+        <p class="entry-desc">Participation aux olympiades scientifiques organisées au prestigieux Collège François-Xavier Vogt.</p>
+      </div>
+
+      <!-- Duplique un .entry pour ajouter d'autres lignes du parcours -->
+
+    </div>
+  </section>
+
+  <section class="section wrap" id="contact">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-card">
+      <div class="contact-item">
+        <div class="contact-label">E-mail (travail)</div>
+        <div class="contact-value"><a href="mailto:Daviel.FONGUIENG@emines.um6p.ma">Daviel.FONGUIENG@emines.um6p.ma</a></div>
+        <div class="entry-desc" style="margin-top:6px; font-size:.85rem;">Je réponds à tous les mails ici ☺️</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">E-mail (perso)</div>
+        <div class="contact-value"><a href="mailto:wafodaviel459@gmail.com">wafodaviel459@gmail.com</a></div>
+        <div class="entry-desc" style="margin-top:6px; font-size:.85rem;">Probabilité de lecture du mail à cette adresse tend vers 0 😉</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Téléphone</div>
+        <div class="contact-value"><a href="https://wa.me/212694238089" target="_blank" rel="noopener">+212 694238089</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value"><a href="https://github.com/wafodaviel459" target="_blank" rel="noopener">github.com/wafodaviel459</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="cv">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Curriculum Vitae</h2>
+    </div>
+    <div class="cv-row">
+      <a class="cv-stamp" href="assets/CV_EN.pdf" target="_blank" rel="noopener">
+        <span class="flag en"></span> English CV
+      </a>
+      <a class="cv-stamp" href="assets/CV_FR.pdf" target="_blank" rel="noopener">
+        <span class="flag fr"></span> CV Français
+      </a>
+    </div>
+    <div class="todo">✎ CV à venir — dépose tes fichiers PDF dans un dossier /assets nommés CV_EN.pdf et CV_FR.pdf (ou ajuste les chemins ci-dessus).</div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 — Wafo Fonguieng Daviel d'Aquin</span>
+  <span>
+    <a href="mailto:Daviel.FONGUIENG@emines.um6p.ma">Daviel.FONGUIENG@emines.um6p.ma</a>
+    &nbsp;·&nbsp;
+    <a href="https://wa.me/212694238089" target="_blank" rel="noopener">+212 694238089 (WhatsApp)</a>
+  </span>
+</footer>
+
+</body>
+</html>
