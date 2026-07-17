@@ -157,10 +157,8 @@
   }
   .cv-stamp:hover{border-color:var(--spine); background:var(--spine-soft); text-decoration:none;}
   .cv-stamp .flag{
-    width:22px; height:14px; border-radius:2px; flex-shrink:0;
+    display:inline-flex; flex-shrink:0;
   }
-  .flag.en{background:linear-gradient(180deg,#B22234 0 33%, #fff 33% 66%, #3C3B6E 66% 100%);}
-  .flag.fr{background:linear-gradient(90deg,#0055A4 0 33%, #fff 33% 66%, #EF4135 66% 100%);}
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -176,11 +174,12 @@
     font-size:12px; border:1px solid var(--ink); border-radius:20px; overflow:hidden;
   }
   .lang-switch button{
-    background:none; border:none; cursor:pointer; padding:5px 12px;
-    font-family:inherit; font-size:inherit; color:var(--ink-soft);
-    transition:background .15s ease, color .15s ease;
+    background:none; border:none; cursor:pointer; padding:6px 10px;
+    display:flex; align-items:center;
+    transition:background .15s ease, opacity .15s ease; filter:grayscale(60%); opacity:.6;
   }
-  .lang-switch button.active{background:var(--ink); color:var(--paper);}
+  .lang-switch button.active{background:var(--ink); filter:none; opacity:1;}
+  .flag-icon{width:20px; height:14px; border-radius:2px; display:block;}
   .lang-switch button:not(.active):hover{background:var(--spine-soft); color:var(--ink);}
 
   /* ---------- EDIT HINTS (remove when done) ---------- */
@@ -206,6 +205,27 @@
 </head>
 <body>
 
+<svg style="display:none" aria-hidden="true">
+  <symbol id="flag-fr" viewBox="0 0 3 2">
+    <rect width="3" height="2" fill="#fff"/>
+    <rect width="1" height="2" fill="#0055A4"/>
+    <rect x="2" width="1" height="2" fill="#EF4135"/>
+  </symbol>
+  <symbol id="flag-gb" viewBox="0 0 60 30">
+    <clipPath id="fgb-t"><rect width="60" height="30"/></clipPath>
+    <g clip-path="url(#fgb-t)">
+      <rect width="60" height="30" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+      <clipPath id="fgb-s">
+        <path d="M30,15 L60,0 V6 L42,15 L60,24 V30 H54 L30,17 L6,30 H0 V24 L18,15 L0,6 V0 H6 Z"/>
+      </clipPath>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#fgb-s)" stroke="#C8102E" stroke-width="4"/>
+      <path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/>
+      <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/>
+    </g>
+  </symbol>
+</svg>
+
 <header class="nav">
   <div class="nav-inner">
     <span class="nav-mark">LOG // wafodaviel</span>
@@ -215,8 +235,8 @@
       <a href="#cv">CV</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language switch">
-      <button type="button" id="btn-fr" class="active" aria-pressed="true">FR</button>
-      <button type="button" id="btn-en" aria-pressed="false">EN</button>
+      <button type="button" id="btn-fr" class="active" aria-pressed="true" aria-label="Français"><svg class="flag-icon" viewBox="0 0 3 2"><use href="#flag-fr"/></svg></button>
+      <button type="button" id="btn-en" aria-pressed="false" aria-label="English"><svg class="flag-icon" viewBox="0 0 60 30"><use href="#flag-gb"/></svg></button>
     </div>
   </div>
 </header>
@@ -353,10 +373,10 @@
     </div>
     <div class="cv-row">
       <a class="cv-stamp" href="assets/CV_EN.pdf" target="_blank" rel="noopener">
-        <span class="flag en"></span> English CV
+        <span class="flag en"><svg class="flag-icon" viewBox="0 0 60 30"><use href="#flag-gb"/></svg></span> English CV
       </a>
       <a class="cv-stamp" href="assets/CV_FR.pdf" target="_blank" rel="noopener">
-        <span class="flag fr"></span> CV Français
+        <span class="flag fr"><svg class="flag-icon" viewBox="0 0 3 2"><use href="#flag-fr"/></svg></span> CV Français
       </a>
     </div>
   </section>
@@ -376,10 +396,15 @@
   var btnFr = document.getElementById('btn-fr');
   var btnEn = document.getElementById('btn-en');
 
+  function naturalDisplay(el){
+    var blockTags = ['DIV','P','H1','H2','H3','H4','SECTION'];
+    return blockTags.indexOf(el.tagName) !== -1 ? 'block' : 'inline';
+  }
+
   function setLang(lang){
     document.documentElement.lang = lang;
     document.querySelectorAll('[data-lang]').forEach(function(el){
-      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+      el.style.display = (el.getAttribute('data-lang') === lang) ? naturalDisplay(el) : 'none';
     });
     btnFr.classList.toggle('active', lang === 'fr');
     btnEn.classList.toggle('active', lang === 'en');
