@@ -169,6 +169,20 @@
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
   }
 
+  /* ---------- LANG TOGGLE ---------- */
+  [data-lang="en"]{display:none;}
+  .lang-switch{
+    display:flex; align-items:center; gap:0; font-family:'IBM Plex Mono', monospace;
+    font-size:12px; border:1px solid var(--ink); border-radius:20px; overflow:hidden;
+  }
+  .lang-switch button{
+    background:none; border:none; cursor:pointer; padding:5px 12px;
+    font-family:inherit; font-size:inherit; color:var(--ink-soft);
+    transition:background .15s ease, color .15s ease;
+  }
+  .lang-switch button.active{background:var(--ink); color:var(--paper);}
+  .lang-switch button:not(.active):hover{background:var(--spine-soft); color:var(--ink);}
+
   /* ---------- EDIT HINTS (remove when done) ---------- */
   .todo{
     background:#FFF7DA; border:1px dashed var(--gold); color:#6b5306;
@@ -196,23 +210,32 @@
   <div class="nav-inner">
     <span class="nav-mark">LOG // wafodaviel</span>
     <nav class="nav-links">
-      <a href="#activities">Parcours</a>
+      <a href="#activities"><span data-lang="fr">Parcours</span><span data-lang="en">Journey</span></a>
       <a href="#contact">Contact</a>
       <a href="#cv">CV</a>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Language switch">
+      <button type="button" id="btn-fr" class="active" aria-pressed="true">FR</button>
+      <button type="button" id="btn-en" aria-pressed="false">EN</button>
+    </div>
   </div>
 </header>
 
 <main>
   <section class="hero wrap">
-    <div class="hero-eyebrow">Carnet de bord — mis à jour en juillet 2026</div>
+    <div class="hero-eyebrow" data-lang="fr">Carnet de bord — mis à jour en juillet 2026</div>
+    <div class="hero-eyebrow" data-lang="en">Logbook — last updated July 2026</div>
     <h1 class="hero-name">Wafo Fonguieng Daviel d'Aquin</h1>
-    <p class="hero-tagline">
+    <p class="hero-tagline" data-lang="fr">
       17 ans, étudiant en 2ᵉ année à l'EMINES – School of Industrial Management (UM6P) · futur ingénieur en management industriel.<br>
       Rigoureux et persévérant, toujours prêt à relever de nouveaux défis. Ma capacité à apprendre rapidement et à m'adapter à des situations variées me permet de m'épanouir dans des environnements dynamiques. Grâce à une solide formation scientifique, je maîtrise les mathématiques, la physique, la chimie et l'informatique, ce qui me permet d'aborder les problèmes avec précision et méthode.
     </p>
+    <p class="hero-tagline" data-lang="en">
+      17 years old, 2nd-year student at EMINES – School of Industrial Management (UM6P) · future industrial management engineer.<br>
+      Rigorous and persistent, always ready to take on new challenges. My ability to learn quickly and adapt to varied situations allows me to thrive in dynamic environments. Thanks to a strong scientific background, I have a solid command of mathematics, physics, chemistry and computer science, which lets me approach problems with precision and method.
+    </p>
     <a class="hero-cta" href="#activities">
-      Voir le parcours
+      <span data-lang="fr">Voir le parcours</span><span data-lang="en">See my journey</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
     </a>
   </section>
@@ -220,55 +243,70 @@
   <section class="section wrap" id="activities">
     <div class="section-head">
       <span class="section-num">01</span>
-      <h2 class="section-title">Parcours &amp; distinctions</h2>
+      <h2 class="section-title" data-lang="fr">Parcours &amp; distinctions</h2>
+      <h2 class="section-title" data-lang="en">Journey &amp; achievements</h2>
     </div>
-    <p class="section-sub">Chaque entrée est un point du chemin : un projet, un prix, une responsabilité. Garde l'ordre chronologique, du plus récent au plus ancien.</p>
+    <p class="section-sub" data-lang="fr">Chaque entrée est un point du chemin : un projet, un prix, une responsabilité. Garde l'ordre chronologique, du plus récent au plus ancien.</p>
+    <p class="section-sub" data-lang="en">Each entry is a milestone: a project, an award, a responsibility. Kept in chronological order, most recent first.</p>
 
     <div class="timeline">
 
       <div class="entry">
         <div class="entry-meta">
           <span class="entry-date">2026 · S2</span>
-          <span class="tag project">Projet</span>
+          <span class="tag project" data-lang="fr">Projet</span>
+          <span class="tag project" data-lang="en">Project</span>
         </div>
-        <div class="entry-title">Machine à dessiner cartésienne (CoreXY)</div>
-        <p class="entry-desc">Projet d'enseignement consistant à réaliser un robot cartésien à trois axes selon une cinématique CoreXY pour le plan XY et un axe Z en pignon-crémaillère, dans le but de reproduire un dessin sur papier. <a class="placeholder-link" href="assets/r%C3%A9sum%C3%A9_de_projet_robot_cart%C3%A9sien.pdf" target="_blank" rel="noopener">Voir le résumé de projet</a>.</p>
+        <div class="entry-title" data-lang="fr">Machine à dessiner cartésienne (CoreXY)</div>
+        <div class="entry-title" data-lang="en">Cartesian drawing machine (CoreXY)</div>
+        <p class="entry-desc" data-lang="fr">Projet d'enseignement consistant à réaliser un robot cartésien à trois axes selon une cinématique CoreXY pour le plan XY et un axe Z en pignon-crémaillère, dans le but de reproduire un dessin sur papier. <a class="placeholder-link" href="assets/r%C3%A9sum%C3%A9_de_projet_robot_cart%C3%A9sien.pdf" target="_blank" rel="noopener">Voir le résumé de projet</a>.</p>
+        <p class="entry-desc" data-lang="en">Coursework project building a three-axis cartesian robot using CoreXY kinematics for the XY plane and a rack-and-pinion Z axis, aiming to reproduce a drawing on paper. <a class="placeholder-link" href="assets/r%C3%A9sum%C3%A9_de_projet_robot_cart%C3%A9sien.pdf" target="_blank" rel="noopener">See project summary</a>.</p>
       </div>
 
       <div class="entry">
         <div class="entry-meta">
           <span class="entry-date">2025 – janv. 2026 · S1</span>
-          <span class="tag project">Projet</span>
+          <span class="tag project" data-lang="fr">Projet</span>
+          <span class="tag project" data-lang="en">Project</span>
         </div>
-        <div class="entry-title">Plateforme mobile à trois roues</div>
-        <p class="entry-desc">Projet d'enseignement consistant à concevoir une plateforme mobile à trois roues, la roue avant unique étant à la fois motrice et directrice. <a class="placeholder-link" href="assets/resume_de_projet_plate_forme_mobile_a_trois_roues.pdf" target="_blank" rel="noopener">Voir le résumé de projet</a>.</p>
+        <div class="entry-title" data-lang="fr">Plateforme mobile à trois roues</div>
+        <div class="entry-title" data-lang="en">Three-wheel mobile platform</div>
+        <p class="entry-desc" data-lang="fr">Projet d'enseignement consistant à concevoir une plateforme mobile à trois roues, la roue avant unique étant à la fois motrice et directrice. <a class="placeholder-link" href="assets/resume_de_projet_plate_forme_mobile_a_trois_roues.pdf" target="_blank" rel="noopener">Voir le résumé de projet</a>.</p>
+        <p class="entry-desc" data-lang="en">Coursework project designing a three-wheel mobile platform, with a single front wheel acting as both drive and steering wheel. <a class="placeholder-link" href="assets/resume_de_projet_plate_forme_mobile_a_trois_roues.pdf" target="_blank" rel="noopener">See project summary</a>.</p>
       </div>
 
       <div class="entry">
         <div class="entry-meta">
           <span class="entry-date">2025</span>
-          <span class="tag award">Prix</span>
+          <span class="tag award" data-lang="fr">Prix</span>
+          <span class="tag award" data-lang="en">Award</span>
         </div>
         <div class="entry-title">7ᵉ place — Journée de l'Excellence Scolaire (JES 2025)</div>
-        <p class="entry-desc">Organisée par l'ISTIC (Institut Supérieur de Traduction, Interprétation et Communication de Yaoundé), filiale de l'IUA (Institut Universitaire d'Afrique). <a class="placeholder-link" href="assets/Attestation_JES_2025.pdf" target="_blank" rel="noopener">Voir l'attestation</a>.</p>
+        <p class="entry-desc" data-lang="fr">Organisée par l'ISTIC (Institut Supérieur de Traduction, Interprétation et Communication de Yaoundé), filiale de l'IUA (Institut Universitaire d'Afrique). <a class="placeholder-link" href="assets/Attestation_JES_2025.pdf" target="_blank" rel="noopener">Voir l'attestation</a>.</p>
+        <p class="entry-desc" data-lang="en">Organized by ISTIC (Higher Institute of Translation, Interpretation and Communication of Yaoundé), a subsidiary of IUA (Institut Universitaire d'Afrique). <a class="placeholder-link" href="assets/Attestation_JES_2025.pdf" target="_blank" rel="noopener">See certificate</a>.</p>
       </div>
 
       <div class="entry">
         <div class="entry-meta">
           <span class="entry-date">2025</span>
-          <span class="tag award">Prix</span>
+          <span class="tag award" data-lang="fr">Prix</span>
+          <span class="tag award" data-lang="en">Award</span>
         </div>
         <div class="entry-title">2ᵉ place sur 1920 candidats — 17ᵉ édition des Olympiades Polytechniciennes Nationales Bilingues (OPNB)</div>
-        <p class="entry-desc">Cameroun, option C (mathématiques et sciences physiques). Organisées par l'ENSPY en collaboration avec Intelligentsia Corporation. <a class="placeholder-link" href="assets/Attestation_OPNB_2025.pdf" target="_blank" rel="noopener">Voir l'attestation</a> · <a class="placeholder-link" href="assets/RESULTATS%20NATIONAUX%20OPNB%202025%20FRANCO%20serie%20C%20et%20E.pdf" target="_blank" rel="noopener">Voir le classement national</a>.</p>
+        <p class="entry-desc" data-lang="fr">Cameroun, option C (mathématiques et sciences physiques). Organisées par l'ENSPY en collaboration avec Intelligentsia Corporation. <a class="placeholder-link" href="assets/Attestation_OPNB_2025.pdf" target="_blank" rel="noopener">Voir l'attestation</a> · <a class="placeholder-link" href="assets/RESULTATS%20NATIONAUX%20OPNB%202025%20FRANCO%20serie%20C%20et%20E.pdf" target="_blank" rel="noopener">Voir le classement national</a>.</p>
+        <p class="entry-desc" data-lang="en">Cameroon, option C (mathematics and physical sciences). Organized by ENSPY in partnership with Intelligentsia Corporation. <a class="placeholder-link" href="assets/Attestation_OPNB_2025.pdf" target="_blank" rel="noopener">See certificate</a> · <a class="placeholder-link" href="assets/RESULTATS%20NATIONAUX%20OPNB%202025%20FRANCO%20serie%20C%20et%20E.pdf" target="_blank" rel="noopener">See national ranking</a>.</p>
       </div>
 
       <div class="entry">
         <div class="entry-meta">
           <span class="entry-date">2025</span>
-          <span class="tag award">Participation</span>
+          <span class="tag award" data-lang="fr">Participation</span>
+          <span class="tag award" data-lang="en">Participation</span>
         </div>
-        <div class="entry-title">Olympiades scientifiques — Collège François-Xavier Vogt</div>
-        <p class="entry-desc">Participation aux olympiades scientifiques organisées au prestigieux Collège François-Xavier Vogt.</p>
+        <div class="entry-title" data-lang="fr">Olympiades scientifiques — Collège François-Xavier Vogt</div>
+        <div class="entry-title" data-lang="en">Science Olympiad — Collège François-Xavier Vogt</div>
+        <p class="entry-desc" data-lang="fr">Participation aux olympiades scientifiques organisées au prestigieux Collège François-Xavier Vogt.</p>
+        <p class="entry-desc" data-lang="en">Took part in the science olympiad held at the prestigious Collège François-Xavier Vogt.</p>
       </div>
 
       <!-- Duplique un .entry pour ajouter d'autres lignes du parcours -->
@@ -283,17 +321,22 @@
     </div>
     <div class="contact-card">
       <div class="contact-item">
-        <div class="contact-label">E-mail (travail)</div>
+        <div class="contact-label" data-lang="fr">E-mail (travail)</div>
+        <div class="contact-label" data-lang="en">Email (work)</div>
         <div class="contact-value"><a href="mailto:Daviel.FONGUIENG@emines.um6p.ma">Daviel.FONGUIENG@emines.um6p.ma</a></div>
-        <div class="entry-desc" style="margin-top:6px; font-size:.85rem;">Je réponds à tous les mails ici ☺️</div>
+        <div class="entry-desc" data-lang="fr" style="margin-top:6px; font-size:.85rem;">Je réponds à tous les mails ici ☺️</div>
+        <div class="entry-desc" data-lang="en" style="margin-top:6px; font-size:.85rem;">I reply to every email sent here ☺️</div>
       </div>
       <div class="contact-item">
-        <div class="contact-label">E-mail (perso)</div>
+        <div class="contact-label" data-lang="fr">E-mail (perso)</div>
+        <div class="contact-label" data-lang="en">Email (personal)</div>
         <div class="contact-value"><a href="mailto:wafodaviel459@gmail.com">wafodaviel459@gmail.com</a></div>
-        <div class="entry-desc" style="margin-top:6px; font-size:.85rem;">Probabilité de lecture du mail à cette adresse tend vers 0 😉</div>
+        <div class="entry-desc" data-lang="fr" style="margin-top:6px; font-size:.85rem;">Probabilité de lecture du mail à cette adresse tend vers 0 😉</div>
+        <div class="entry-desc" data-lang="en" style="margin-top:6px; font-size:.85rem;">Probability of this inbox being read tends to 0 😉</div>
       </div>
       <div class="contact-item">
-        <div class="contact-label">Téléphone</div>
+        <div class="contact-label" data-lang="fr">Téléphone</div>
+        <div class="contact-label" data-lang="en">Phone</div>
         <div class="contact-value"><a href="https://wa.me/212694238089" target="_blank" rel="noopener">+212 694238089</a></div>
       </div>
       <div class="contact-item">
@@ -328,5 +371,30 @@
   </span>
 </footer>
 
+<script>
+(function(){
+  var btnFr = document.getElementById('btn-fr');
+  var btnEn = document.getElementById('btn-en');
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-lang]').forEach(function(el){
+      el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+    });
+    btnFr.classList.toggle('active', lang === 'fr');
+    btnEn.classList.toggle('active', lang === 'en');
+    btnFr.setAttribute('aria-pressed', lang === 'fr');
+    btnEn.setAttribute('aria-pressed', lang === 'en');
+    try{ localStorage.setItem('site-lang', lang); }catch(e){}
+  }
+
+  btnFr.addEventListener('click', function(){ setLang('fr'); });
+  btnEn.addEventListener('click', function(){ setLang('en'); });
+
+  var saved = null;
+  try{ saved = localStorage.getItem('site-lang'); }catch(e){}
+  setLang(saved === 'en' ? 'en' : 'fr');
+})();
+</script>
 </body>
 </html>
